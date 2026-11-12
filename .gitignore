@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+apps/api/.venv/
+
+# Node
+node_modules/
+apps/web/dist/
+apps/web/.vite/
+*.tsbuildinfo
+
+# Local data — schema and seed notes are committed; the database is not
+data/app.db
+data/app.db-*
+data/vault/inbox/**
+!data/vault/inbox/.gitkeep
+data/vault/generated/**
+!data/vault/generated/.gitkeep
+
+# Env and OS
+.env
+.DS_Store
+*.log

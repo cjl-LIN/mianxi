@@ -60,11 +60,15 @@ def as_text(value, default: str = "") -> str:
     return str(value).strip()
 
 
+_WIKI_LABEL = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|([^\]]+))?\]\]")
+
+
 def summarize(body: str) -> str:
+    visible = _WIKI_LABEL.sub(lambda match: (match.group(2) or match.group(1)).strip(), body)
     parts: list[str] = []
-    for line in body.splitlines():
+    for line in visible.splitlines():
         stripped = line.strip()
-        if not stripped or stripped.startswith("#") or stripped.startswith("[["):
+        if not stripped or stripped.startswith("#"):
             continue
         parts.append(stripped)
         if len("".join(parts)) > 160:

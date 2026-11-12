@@ -45,6 +45,7 @@ def test_health_and_demo_graph(client):
     assert ("kp-skill", "kp-agent-loop", "part_of") in edges
 
     detail = client.get("/api/knowledge/kp-agent-loop").json()
+    assert "[[" not in detail["summary"]
     assert "kp-context" in {item["id"] for item in detail["relations"]["prerequisite"]}
     assert {item["id"] for item in detail["projects"]} >= {"proj-ai-pm", "proj-ai-fe"}
 
